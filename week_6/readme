@@ -1,0 +1,28 @@
+PImage image;
+PShape shape;
+PFont f;
+
+
+import wordcram.*;
+import wordcram.text.*;
+import java.awt.*;
+
+
+
+void setup() {
+  image = loadImage("bee.png");
+  size(800, 600);
+  background(255);
+  colorMode(HSB);
+  image.resize(width, height);
+  Shape imageShape = new ImageShaper().shape(image, #000000);
+  ShapeBasedPlacer placer = new ShapeBasedPlacer(imageShape);
+   new WordCram(this)
+      .fromTextFile("speech.txt")
+      .withFont(createFont("StencilStd.otf", 1))
+      .sizedByWeight(5, 90)
+       .withPlacer(placer)
+      .withNudger(placer)
+      .withColors(color(255, 87, 51), color(30), color(219, 255, 51))
+      .drawAll();
+}
